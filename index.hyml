@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional CV Builder - Teal Theme</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-teal: #008080;
+            --light-teal: #20B2AA;
+            --dark-teal: #006666;
+            --light-gray: #f5f5f5;
+            --medium-gray: #e0e0e0;
+            --dark-gray: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-teal), var(--light-teal));
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .cv-builder {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .form-section {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .preview-section {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .section-title {
+            color: var(--primary-teal);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-teal);
+            font-size: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-teal);
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary-teal);
+            outline: none;
+        }
+        
+        .btn {
+            background-color: var(--primary-teal);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn:hover {
+            background-color: var(--dark-teal);
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .add-btn {
+            background-color: white;
+            color: var(--primary-teal);
+            border: 2px dashed var(--primary-teal);
+            padding: 10px 15px;
+            margin-top: 10px;
+        }
+        
+        .add-btn:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .divider {
+            height: 1px;
+            background-color: var(--medium-gray);
+            margin: 25px 0;
+        }
+        
+        /* Preview Styling */
+        .preview-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--primary-teal);
+        }
+        
+        .preview-name {
+            font-size: 2rem;
+            color: var(--primary-teal);
+            margin-bottom: 5px;
+        }
+        
+        .preview-contact {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .preview-section-title {
+            background-color: var(--primary-teal);
+            color: white;
+            padding: 8px 15px;
+            margin: 20px 0 15px;
+            border-radius: 4px;
+            font-size: 1.2rem;
+        }
+        
+        .preview-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        .preview-table th, .preview-table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid var(--medium-gray);
+        }
+        
+        .preview-table th {
+            background-color: var(--light-gray);
+        }
+        
+        .declaration {
+            font-style: italic;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px dashed var(--medium-gray);
+        }
+        
+        .signature {
+            text-align: right;
+            margin-top: 40px;
+            font-weight: 600;
+            color: var(--primary-teal);
+        }
+        
+        .education-entry, .qualification-entry {
+            background-color: var(--light-gray);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .remove-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .remove-btn:hover {
+            background-color: #ff5252;
+        }
+        
+        @media (max-width: 768px) {
+            .cv-builder {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Create Professional CV Online</h1>
+            <p>Fill in your details and generate a beautiful teal-themed CV</p>
+        </header>
+        
+        <div class="cv-builder">
+            <div class="form-section">
+                <h2 class="section-title">Personal Details</h2>
+                
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" placeholder="e.g., Swapan Baroi" oninput="updatePreview()">
+                </div>
+                
+                <div class="form-group">
+                    <label for="mobile">Mobile Number</label>
+                    <input type="tel" id="mobile" placeholder="e.g., 98544*****" oninput="updatePreview()">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="e.g., example@gmail.com" oninput="updatePreview()">
+                </div>
+                
+                <div class="form-group">
+                    <label for="father">Father's Name</label>
+                    <input type="text" id="father" placeholder="e.g., My Father Name" oninput="updatePreview()">
+                </div>
+                
+                <div class="form-group">
+                    <label for="mother">Mother's Name</label>
+                    <input type="text" id="mother" placeholder="e.g., My Mother Name" oninput="updatePreview()">
+                </div>
+                
+                <div class="form-group">
+                    <label for="gender">Select Gender</label>
+                    <select id="gender" onchange="updatePreview()">
+                        <option value="">-- Select Gender --</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="category">Select Category</label>
+                    <select id="category" onchange="updatePreview()">
+                        <option value="">-- Select Category --</option>
+                        <option value="General">General</option>
+                        <option value="OBC">OBC</option>
+                        <option value="SC">SC</option>
+                        <option value="ST">ST</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="marital">Marital Status</label>
+                    <select id="marital" onchange="updatePreview()">
+                        <option value="">-- Marital Status --</option>
+                        <option value="Unmarried">Unmarried</option>
+                        <option value="Married">Married</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="languages">Known Languages</label>
+                    <input type="text" id="languages" placeholder="e.g., English, Assamese, Hindi" oninput="updatePreview()">
+                </div>
+                
+                <div class="form-group">
+                    <label for="experience">Experience</label>
+                    <input type="text" id="experience" placeholder="e.g., 5 Year Experience" oninput="updatePreview()">
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <textarea id="address" rows="3" placeholder="My Full Address" oninput="updatePreview()"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="objective">Career Objective</label>
+                    <textarea id="objective" rows="3" placeholder="To work with an organization where I can learn new skills..." oninput="updatePreview()"></textarea>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <h2 class="section-title">Educational Qualifications</h2>
+                
+                <div id="education-container">
+                    <div class="education-entry">
+                        <button class="remove-btn" onclick="removeEducation(this)">×</button>
+                        <div class="form-group">
+                            <label>Exam Name</label>
+                            <input type="text" placeholder="e.g., 10th" oninput="updatePreview()">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Board/University</label>
+                            <input type="text" placeholder="e.g., SEBA" oninput="updatePreview()">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Passing Year</label>
+                            <input type="text" placeholder="e.g., 2020" oninput="updatePreview()">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Percentage</label>
+                            <input type="text" placeholder="e.g., 99" oninput="updatePreview()">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Select Division</label>
+                            <select onchange="updatePreview()">
+                                <option value="">-- Select Division --</option>
+                                <option value="1st Division">1st Division</option>
+                                <option value="2nd Division">2nd Division</option>
+                                <option value="3rd Division">3rd Division</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn add-btn" onclick="addEducation()"><i class="fas fa-plus"></i> Add Education</button>
+                
+                <div class="divider"></div>
+                
+                <h2 class="section-title">Other Qualifications</h2>
+                
+                <div id="qualification-container">
+                    <div class="qualification-entry">
+                        <button class="remove-btn" onclick="removeQualification(this)">×</button>
+                        <div class="form-group">
+                            <label>Course/Certification</label>
+                            <input type="text" placeholder="e.g., Computer" oninput="updatePreview()">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Institution/Authority</label>
+                            <input type="text" placeholder="e.g., PGDCA" oninput="updatePreview()">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Year</label>
+                            <input type="text" placeholder="e.g., 1 Years" oninput="updatePreview()">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Remarks/Grade</label>
+                            <input type="text" placeholder="e.g., A+" oninput="updatePreview()">
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn add-btn" onclick="addQualification()"><i class="fas fa-plus"></i> Add Qualification</button>
+                
+                <div class="divider"></div>
+                
+                <h2 class="section-title">Upload Profile Photo</h2>
+                
+                <div class="form-group">
+                    <label for="photo">Choose File</label>
+                    <input type="file" id="photo">
+                </div>
+                
+                <div class="form-group">
+                    <label for="place">Place</label>
+                    <input type="text" id="place" placeholder="e.g., Morigaon" oninput="updatePreview()">
+                </div>
+                
+                <div class="form-group">
+                    <label for="signature">Signature (Your Name)</label>
+                    <input type="text" id="signature" placeholder="e.g., Swapan Baroi" oninput="updatePreview()">
+                </div>
+                
+                <button class="btn" onclick="downloadCV()"><i class="fas fa-download"></i> Submit & Download CV</button>
+            </div>
+            
+            <div class="preview-section">
+                <h2 class="section-title">CV Preview</h2>
+                
+                <div class="preview-content" id="preview-content">
+                    <div class="preview-header">
+                        <div class="preview-name" id="preview-name">Swapan Baroi</div>
+                        <div class="preview-contact">
+                            <span id="preview-mobile">Mobile: 98544*****</span>
+                            <span id="preview-email">Email: xxxxxxxx@gmail.com</span>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-section-title">OBJECTIVE</div>
+                    <p id="preview-objective">To work with an organization where I can learn new skills and increase my abilities for the organizational goals as well as myself.</p>
+                    
+                    <div class="preview-section-title">EDUCATIONAL QUALIFICATIONS</div>
+                    <table class="preview-table" id="preview-education">
+                        <thead>
+                            <tr>
+                                <th>Exam Name</th>
+                                <th>Board/University</th>
+                                <th>Year</th>
+                                <th>Percentage</th>
+                                <th>Division</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>10th</td>
+                                <td>SEBA</td>
+                                <td>2020</td>
+                                <td>99</td>
+                                <td>1st Division</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="preview-section-title">OTHER QUALIFICATIONS</div>
+                    <table class="preview-table" id="preview-qualification">
+                        <thead>
+                            <tr>
+                                <th>Course/Certification</th>
+                                <th>Institution</th>
+                                <th>Year</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Computer</td>
+                                <td>PGDCA</td>
+                                <td>1 Years</td>
+                                <td>A+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="preview-section-title">PERSONAL INFORMATION</div>
+                    <table class="preview-table" id="preview-personal">
+                        <tbody>
+                            <tr>
+                                <td><strong>Applicant's Name</strong></td>
+                                <td>Swapan Baroi</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Father's Name</strong></td>
+                                <td>My Father Name</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Mother's Name</strong></td>
+                                <td>My Mother Name</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gender</strong></td>
+                                <td>Male</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Category</strong></td>
+                                <td>General</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Marital Status</strong></td>
+                                <td>Unmarried</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Languages Known</strong></td>
+                                <td>English, Assamese, Hindi</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Experience</strong></td>
+                                <td>5 Year Experience</td>
+ 
